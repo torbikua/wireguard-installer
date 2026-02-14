@@ -10,7 +10,7 @@ WG_IF="wg0"
 WG_CONF="/etc/wireguard/${WG_IF}.conf"
 
 echo -e "${CYAN}=====================================================${NC}"
-echo -e "${CYAN}  WireGuard Client Automatic setup script (C) torbik ${NC}"
+echo -e "${CYAN}  WireGuard Client setup script v.1.2 (C) torbik ${NC}"
 echo -e "${CYAN}=====================================================${NC}"
 echo ""
 
