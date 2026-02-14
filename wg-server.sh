@@ -66,7 +66,7 @@ install_server() {
     detect_network
 
     echo -e "${CYAN}══════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  Установка WireGuard сервера                 ${NC}"
+    echo -e "${CYAN}  WireGuard Automatic Installer v.1.2         ${NC}"
     echo -e "${CYAN}══════════════════════════════════════════════${NC}"
     echo ""
     echo -e "${YELLOW}Параметры:${NC}"
