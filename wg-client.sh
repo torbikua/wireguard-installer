@@ -9,9 +9,9 @@ NC='\033[0m'
 WG_IF="wg0"
 WG_CONF="/etc/wireguard/${WG_IF}.conf"
 
-echo -e "${CYAN}══════════════════════════════════════════════${NC}"
-echo -e "${CYAN}  WireGuard Outbound Tunnel for Amnezia Host  ${NC}"
-echo -e "${CYAN}══════════════════════════════════════════════${NC}"
+echo -e "${CYAN}=====================================================${NC}"
+echo -e "${CYAN}  WireGuard Client Automatic setup script (C) torbik ${NC}"
+echo -e "${CYAN}=====================================================${NC}"
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
@@ -19,9 +19,9 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# ══════════════════════════════════════════════
+# ==============================================
 # Функции
-# ══════════════════════════════════════════════
+# ==============================================
 
 get_network_env() {
     DEFAULT_IF=$(ip -4 route show default | grep -v "wg\|tun" | awk '{print $5}' | head -1)
@@ -107,9 +107,9 @@ wait_handshake() {
 
 check_ip() {
     echo ""
-    echo -e "${CYAN}══════════════════════════════════════${NC}"
+    echo -e "${CYAN}======================================${NC}"
     echo -e "${CYAN}  Проверка внешнего IP                 ${NC}"
-    echo -e "${CYAN}══════════════════════════════════════${NC}"
+    echo -e "${CYAN}======================================${NC}"
     echo ""
     echo -e "  IP сервера (реальный):  ${RED}${HOST_IP}${NC}"
     echo -n "  IP сервера (текущий):   "
@@ -239,11 +239,13 @@ install_and_start() {
     fi
 
     echo ""
-    echo -e "${YELLOW}[2/4] Вставьте WireGuard-конфиг → Enter → Ctrl+D:${NC}"
-    echo ""
+    echo -e "${YELLOW}[2/4] Вставь WireGuard-конфиг CTRL+V → Enter → Ctrl+D:${NC}"
+    echo -e "${RED}------------------------------------------------------------------"
 
     TMPRAW=$(mktemp)
     cat > "$TMPRAW"
+    echo -e "------------------------------------------------------------------${NC}"
+    echo ""
 
     if [ ! -s "$TMPRAW" ]; then
         echo -e "${RED}Пусто. Выход.${NC}"
@@ -284,9 +286,9 @@ install_and_start() {
     systemctl enable wg-quick@${WG_IF} 2>/dev/null || true
 }
 
-# ══════════════════════════════════════════════
+# ==============================================
 # ГЛАВНАЯ ЛОГИКА
-# ══════════════════════════════════════════════
+# ==============================================
 
 get_network_env
 
@@ -348,3 +350,5 @@ fi
 
 echo ""
 echo -e "${CYAN}Управление: bash $0${NC}"
+
+sleep 3
